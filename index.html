@@ -5,32 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الحوكمة - نظام إدارة الشواهد والمستندات</title>
     <style>
+        /* الألوان المستخرجة من هوية التطبيق */
         :root {
-            --primary-color: #0f5132;
-            --secondary-color: #198754;
-            --bg-color: #f4f6f8;
+            --primary-teal: #18aaa8;
+            --primary-blue: #303f92;
+            --bg-light: #f4f5f5;
+            --secondary-dark-teal: #047399;
+            --secondary-teal: #19ada9;
+            --secondary-light-blue: #deecec;
             --card-bg: #ffffff;
             --text-color: #212529;
-            --border-color: #dee2e6;
+            --border-color: #deecec;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-light);
             color: var(--text-color);
             margin: 0;
             padding: 0;
         }
 
-        /* شريط التنقل العلوي */
+        /* شريط التنقل العلوي بالتدرج المدموج للهوية */
         .navbar {
             position: sticky;
             top: 0;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-teal) 100%);
             color: white;
             padding: 10px 20px;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(4, 115, 153, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -45,12 +49,13 @@
         }
 
         .nav-logo {
-            width: 35px;
-            height: 35px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             object-fit: cover;
             background: white;
             padding: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .navbar-title {
@@ -60,7 +65,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 300px;
+            max-width: 320px;
         }
 
         .nav-menu {
@@ -74,17 +79,20 @@
         .nav-item {
             background: rgba(255, 255, 255, 0.15);
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 6px 12px;
+            border-radius: 18px;
             text-decoration: none;
             font-size: 0.8rem;
             white-space: nowrap;
-            transition: background 0.2s, transform 0.2s;
+            transition: all 0.25s ease;
         }
 
         .nav-item:hover, .nav-item.active {
-            background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.05);
+            background: white;
+            color: var(--primary-blue);
+            font-weight: bold;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .container {
@@ -99,9 +107,10 @@
             align-items: center;
             margin-bottom: 25px;
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid var(--secondary-light-blue);
             flex-wrap: wrap;
             gap: 15px;
         }
@@ -113,50 +122,54 @@
         }
 
         .header-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
+            width: 65px;
+            height: 65px;
+            border-radius: 10px;
             object-fit: cover;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--secondary-light-blue);
             background: white;
+            padding: 3px;
         }
 
         .export-btn {
-            background-color: #198754;
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--secondary-dark-teal) 100%);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
+            padding: 12px 22px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background 0.2s;
+            box-shadow: 0 4px 10px rgba(24, 170, 168, 0.3);
+            transition: all 0.25s ease;
         }
 
         .export-btn:hover {
-            background-color: #146c43;
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(24, 170, 168, 0.4);
         }
 
         .domain-card {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
             overflow: hidden;
-            scroll-margin-top: 80px;
+            scroll-margin-top: 85px;
         }
 
         .domain-header {
-            background-color: #e8f5e9;
-            color: var(--primary-color);
-            padding: 15px 20px;
-            font-size: 1.25rem;
+            background-color: var(--secondary-light-blue);
+            color: var(--primary-blue);
+            padding: 16px 20px;
+            font-size: 1.2rem;
             font-weight: bold;
-            border-bottom: 2px solid #a3cfbb;
+            border-bottom: 2px solid var(--primary-teal);
         }
 
         .evidence-list {
@@ -179,7 +192,7 @@
             font-weight: 600;
             font-size: 0.95rem;
             line-height: 1.5;
-            color: #333;
+            color: var(--text-color);
         }
 
         .file-upload-wrapper {
@@ -194,34 +207,37 @@
         }
 
         .file-label {
-            background-color: var(--primary-color);
+            background-color: var(--primary-teal);
             color: white;
-            padding: 7px 14px;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: background 0.2s;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
         }
 
         .file-label:hover {
-            background-color: #0b3d26;
+            background-color: var(--secondary-dark-teal);
+            transform: translateY(-1px);
         }
 
         .preview-btn {
-            background-color: #0dcaf0;
-            color: #212529;
+            background-color: var(--primary-blue);
+            color: white;
             border: none;
-            padding: 7px 14px;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
             display: none;
             text-decoration: none;
+            transition: background 0.2s;
         }
 
         .preview-btn:hover {
-            background-color: #31d2f2;
+            background-color: #232f70;
         }
 
         .file-status {
@@ -231,7 +247,7 @@
         }
 
         .status-uploaded {
-            color: #198754;
+            color: var(--secondary-dark-teal);
             font-weight: bold;
         }
 
@@ -255,7 +271,7 @@
 <!-- شريط التنقل العلوي -->
 <div class="navbar">
     <div class="nav-brand">
-        <img src="logo.jpeg" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
         <h2 class="navbar-title" id="current-nav-title">الحوكمة - الامتثال والالتزام</h2>
     </div>
     <div class="nav-menu" id="nav-menu"></div>
@@ -264,9 +280,9 @@
 <div class="container">
     <div class="header-actions">
         <div class="main-header-content">
-            <img src="logo.jpeg" alt="شعار الجمعية" class="header-logo" onerror="this.src='https://via.placeholder.com/60?text=Ghadaq'">
+            <img src="logo.png" alt="شعار الجمعية" class="header-logo" onerror="this.src='https://via.placeholder.com/65?text=Ghadaq'">
             <div>
-                <h1 style="margin:0; color: var(--primary-color); font-size: 1.8rem;">معيار الامتثال والالتزام</h1>
+                <h1 style="margin:0; color: var(--primary-blue); font-size: 1.8rem;">معيار الامتثال والالتزام</h1>
                 <p style="margin:5px 0 0 0; color:#6c757d;">إدارة الشواهد، إرفاق المستندات، المعاينة الفورية، وتصدير تقرير الإكسل</p>
             </div>
         </div>
@@ -389,7 +405,7 @@ const domainsData = [
         id: "m10",
         title: "10. تكوين اللجان",
         items: [
-            "قائمة باللجان المكونة وقرارات التكوين واختصاصاتها ومحاضر اجتماعاتها",
+            "قائمة باللجان المكونة وقرارات التكوين وااختصاصاتها ومحاضر اجتماعاتها",
             "قرار تشكيل لجنة المراجعة الداخلية",
             "قرار تشكيل لجنة الترشيحات والمكافآت"
         ]
